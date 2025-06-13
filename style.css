@@ -1,0 +1,279 @@
+body {
+  margin: 0;
+  background: #0d0d0d;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+/* Khung chính */
+.center-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 560px;
+  height: 280px;
+  padding: 30px 50px;
+  border-radius: 16px;
+  overflow: hidden;
+  z-index: 1;
+
+  background: #1a1a1a; /* fallback khi chưa load gradient */
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease;
+
+  /* Thêm lớp phủ gradient xoay bên trong */
+}
+.center-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from 0deg,
+    #1f1f1f,
+    #3a3a3a,
+    #1f1f1f
+  );
+  animation: spinGradient 8s linear infinite;
+  z-index: 0;
+  opacity: 0.3; /* Có thể tăng opacity để rõ hơn */
+}
+
+@keyframes spinGradient {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.center-box:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  
+}
+.site-title {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 36px;
+  font-weight: bold;
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+  opacity: 0;
+  animation: fadeInTitle 1.5s ease-out forwards;
+}
+
+@keyframes fadeInTitle {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Particles */
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Nội dung */
+.content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+}
+
+.download-button {
+  display: inline-block;
+  padding: 15px 35px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background: transparent; /* nền trong suốt */
+  border: 2px solid #00ffff; /* viền cyan */
+  border-radius: 12px;
+  box-shadow: none; /* bỏ shadow */
+  text-shadow: 0 0 8px white;
+  text-decoration: none;
+  margin-top: 25px;
+  transition: 0.3s;
+}
+
+.download-button i {
+  margin-right: 10px;
+}
+
+.download-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00ffff; /* thêm glow khi hover */
+  background: rgba(0, 255, 255, 0.1); /* hover có nền mờ nhẹ */
+}
+
+.glow-text-white {
+  color: white;
+  font-size: 34px;
+  font-weight: bold;
+  text-shadow: 0 0 12px white, 0 0 24px white;
+  margin-bottom: 10px;
+}
+.glow-text-blue {
+  color: #00bfff;
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 0 0 4px #00bfff;
+  margin: 8px 0;
+}
+.glow-text-main {
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 20px 0;
+  text-shadow: 0 0 12px #00ffff, 0 0 28px #00ffff;
+}
+
+.links a {
+  color: #00bfff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 0 0 6px #00bfff;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.links a:hover {
+  color: #ffffff;
+}
+/* Nút settings */
+.settings-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  z-index: 4;
+  transition: transform 0.2s ease;
+}
+
+.settings-icon:hover {
+  transform: scale(1.2) rotate(30deg);
+}
+
+/* Hộp settings */
+.settings-box {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  width: 300px;
+  padding: 15px 20px;
+  background: rgba(46, 43, 43, 0.8);
+  border: 2px solid #00ffff;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+  color: #ffffff;
+  z-index: 5;
+  cursor: move;
+  display: none;
+  user-select: none;
+}
+
+/* Hiệu ứng text chạy ra từ từ  */
+    .settings-box p {
+      opacity: 0;
+      transform: translateX(-30px);
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+      margin: 15px 0;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 8px 0;
+      border-left: 3px solid transparent;
+      padding-left: 10px;
+      transition: all 0.3s ease;
+    }
+.settings-box p:hover {
+      border-left-color: #00ffff;
+      background: rgba(0, 255, 255, 0.1);
+      transform: translateX(5px);
+    }
+
+    /* Animation cho từng dòng */
+    .settings-box p:nth-child(2) { animation: slideInLeft 0.6s ease-out 0.1s forwards; }
+    .settings-box p:nth-child(3) { animation: slideInLeft 0.6s ease-out 0.3s forwards; }
+    .settings-box p:nth-child(4) { animation: slideInLeft 0.6s ease-out 0.5s forwards; }
+    .settings-box p:nth-child(5) { animation: slideInLeft 0.6s ease-out 0.7s forwards; }
+    .settings-box p:nth-child(6) { animation: slideInLeft 0.6s ease-out 0.9s forwards; }
+    .settings-box p:nth-child(7) { animation: slideInLeft 0.6s ease-out 0.11s forwards; }
+
+
+@keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Reset animation khi mở lại */
+    .settings-box.reset-animation p {
+      animation: none;
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+  /* Language Toggle Tab */
+    .language-toggle {
+      position: absolute;
+      bottom: -15px;
+      left: -15px;
+      background: rgba(0, 255, 255, 0.1);
+      border: 1px solid #00ffff;
+      border-radius: 20px;
+      padding: 8px 15px;
+      cursor: pointer;
+      z-index: 4;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      user-select: none;
+    }
+
+    .language-toggle:hover {
+      background: rgba(0, 255, 255, 0.2);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    }
+
+    .language-toggle span {
+      color: #00ffff;
+      font-size: 12px;
+      font-weight: bold;
+      text-shadow: 0 0 5px #00ffff;
+      margin: 0 3px;
+      transition: all 0.3s ease;
+    }
+
+    .language-toggle .active {
+      color: #ffffff;
+      text-shadow: 0 0 8px #ffffff;
+    }
+
+    .language-toggle .separator {
+      color: #666;
+      margin: 0 5px;
+    }
+
